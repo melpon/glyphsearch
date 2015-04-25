@@ -1,0 +1,889 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+<script>
+
+GS_GLYPH_INFOS = [
+  {
+    name: 'GAIN',
+    lines: [1, 6],
+  },
+  {
+    name: 'OLD',
+    lines: [1, 3, 6],
+  },
+  {
+    name: 'PAST',
+    lines: [1, 3, 6, 8],
+  },
+  {
+    name: 'DESTROY',
+    lines: [1, 3, 5, 7, 9],
+  },
+  {
+    name: 'BREATHE',
+    lines: [1, 3, 5, 4, 2],
+  },
+  {
+    name: 'LIVE',
+    lines: [1, 3, 5, 4, 2],
+  },
+  {
+    name: 'CIVILIZATION',
+    lines: [1, 3, 6, 7, 4, 2],
+  },
+  {
+    name: 'DEFEND',
+    lines: [1, 6, 10, 7, 2],
+  },
+  {
+    name: 'HELP',
+    lines: [1, 3, 5, 6, 7],
+  },
+  {
+    name: 'PURSUE',
+    lines: [1, 3, 0, 4],
+  },
+  {
+    name: 'WEAK',
+    lines: [1, 3, 4, 7],
+  },
+  {
+    name: 'AVOID',
+    lines: [1, 0, 4, 2, 9],
+  },
+  {
+    name: 'REBEL',
+    lines: [1, 6, 5, 4, 2, 9],
+  },
+  {
+    name: 'SEPERATE',
+    lines: [1, 3, 6, 5, 4, 7, 9],
+  },
+  {
+    name: 'FORGET',
+    lines: [6, 8],
+  },
+  {
+    name: 'CREATE',
+    lines: [2, 4, 5, 6, 8],
+  },
+  {
+    name: 'ADVANCE',
+    lines: [0, 3, 8],
+  },
+  {
+    name: 'DISTANCE',
+    lines: [0, 1, 8],
+  },
+  {
+    name: 'OUTSIDE',
+    lines: [0, 1, 8],
+  },
+  {
+    name: 'PATH',
+    lines: [0, 5, 8],
+  },
+  {
+    name: 'DETERIORATE',
+    lines: [3, 5, 6, 8],
+  },
+  {
+    name: 'COURAGE',
+    lines: [8, 3, 6, 7],
+  },
+  {
+    name: 'MESSAGE',
+    lines: [8, 3, 5, 7, 2],
+  },
+  {
+    name: 'AGAIN',
+    lines: [8, 3, 6, 5, 4, 7],
+  },
+  {
+    name: 'REPEAT',
+    lines: [8, 3, 6, 5, 4, 7],
+  },
+  {
+    name: 'WANT',
+    lines: [8, 6, 10, 7],
+  },
+  {
+    name: 'DISCOVER',
+    lines: [2, 9, 10, 8],
+  },
+  {
+    name: 'SELF',
+    lines: [9, 10, 8],
+  },
+  {
+    name: 'DIE',
+    lines: [8, 6, 5, 7, 9],
+  },
+  {
+    name: 'STABILITY',
+    lines: [8, 6, 7, 9],
+  },
+  {
+    name: 'STAY',
+    lines: [8, 6, 7, 9],
+  },
+  {
+    name: 'SAFETY',
+    lines: [8, 3, 4, 9],
+  },
+  {
+    name: 'NATURE',
+    lines: [8, 6, 3, 4, 7, 9],
+  },
+  {
+    name: 'CONFLICT',
+    lines: [8, 3, 6, 7, 4, 9],
+  },
+  {
+    name: 'SHAPERS',
+    lines: [8, 6, 3, 0, 4, 7, 9],
+  },
+  {
+    name: 'ATTACK',
+    lines: [8, 3, 0, 4, 9],
+  },
+  {
+    name: 'WAR',
+    lines: [8, 3, 0, 4, 9],
+  },
+  {
+    name: 'CHAOS',
+    lines: [8, 1, 0, 2, 4, 5, 6, 10],
+  },
+  {
+    name: 'LIBERATE',
+    lines: [0, 2, 4, 5, 3, 8],
+  },
+  {
+    name: 'SEE',
+    lines: [0, 3],
+  },
+  {
+    name: 'LESS',
+    lines: [3, 5, 4],
+  },
+  {
+    name: 'NOW',
+    lines: [3, 6, 4, 7],
+  },
+  {
+    name: 'PRESENT',
+    lines: [3, 6, 4, 7],
+  },
+  {
+    name: 'NOT',
+    lines: [3, 4, 7],
+  },
+  {
+    name: 'INSIDE',
+    lines: [3, 4, 7],
+  },
+  {
+    name: 'ANSWER',
+    lines: [3, 4, 7, 5],
+  },
+  {
+    name: 'FEAR',
+    lines: [2, 7, 4, 3],
+  },
+  {
+    name: 'HIDE',
+    lines: [3, 4, 2, 7, 6],
+  },
+  {
+    name: 'DESTINY',
+    lines: [3, 5, 4, 7, 6, 10],
+  },
+  {
+    name: 'SIMPLE',
+    lines: [6, 7],
+  },
+  {
+    name: 'MORE',
+    lines: [6, 5, 7],
+  },
+  {
+    name: 'EQUAL',
+    lines: [6, 3, 4, 7],
+  },
+  {
+    name: 'CHANGE',
+    lines: [6, 5, 10, 7],
+  },
+  {
+    name: 'DIFFICULT',
+    lines: [2, 4, 7, 5, 6],
+  },
+  {
+    name: 'SAVE',
+    lines: [2, 7, 5, 6],
+  },
+  {
+    name: 'EVOLUTION',
+    lines: [0, 5, 3, 6],
+  },
+  {
+    name: 'SUCCESS',
+    lines: [0, 5, 3, 6],
+  },
+  {
+    name: 'QUESTION',
+    lines: [0, 4, 3, 6],
+  },
+  {
+    name: 'ESCAPE',
+    lines: [0, 2, 4, 3, 6],
+  },
+  {
+    name: 'COMPLEX',
+    lines: [4, 3, 5, 6],
+  },
+  {
+    name: 'IDEA',
+    lines: [6, 8, 1, 3, 5, 7, 9, 2, 4],
+  },
+  {
+    name: 'THOUGHT',
+    lines: [6, 8, 1, 3, 5, 7, 9, 2, 4],
+  },
+  {
+    name: 'CLEAR',
+    lines: [0, 5, 10],
+  },
+  {
+    name: 'RETREAT',
+    lines: [0, 4, 9],
+  },
+  {
+    name: 'BARRIER',
+    lines: [0, 5, 7, 9],
+  },
+  {
+    name: 'DATA',
+    lines: [0, 4, 5, 6, 10],
+  },
+  {
+    name: 'FAILURE',
+    lines: [0, 5, 4, 7],
+  },
+  {
+    name: 'FOLLOW',
+    lines: [0, 4, 2, 9],
+  },
+  {
+    name: 'DANGER',
+    lines: [0, 3, 5, 10],
+  },
+  {
+    name: 'LEAD',
+    lines: [0, 1, 8, 6, 10],
+  },
+  {
+    name: 'POTENTIAL',
+    lines: [0, 5, 7, 9, 2],
+  },
+  {
+    name: 'CONTEMPLATE',
+    lines: [0, 2, 9, 10, 6, 3, 5, 4],
+  },
+  {
+    name: 'USE',
+    lines: [5, 7, 2],
+  },
+  {
+    name: 'SEARCH',
+    lines: [7, 6, 3, 4, 5],
+  },
+  {
+    name: 'NEW',
+    lines: [4, 7, 9],
+  },
+  {
+    name: 'EASY',
+    lines: [4, 5, 6, 10],
+  },
+  {
+    name: 'REACT',
+    lines: [4, 3, 5, 7, 9],
+  },
+  {
+    name: 'HAVE',
+    lines: [7, 5, 6, 10],
+  },
+  {
+    name: 'CAPTURE',
+    lines: [2, 7, 5, 6, 8, 10],
+  },
+  {
+    name: 'JOURNEY',
+    lines: [2, 4, 5, 3, 1, 8, 10],
+  },
+  {
+    name: 'IGNORE',
+    lines: [7, 9],
+  },
+  {
+    name: 'LOSE',
+    lines: [2, 7],
+  },
+  {
+    name: 'IMPROVE',
+    lines: [2, 4, 5, 7],
+  },
+  {
+    name: 'FUTURE',
+    lines: [2, 4, 7, 9],
+  },
+  {
+    name: 'PURE',
+    lines: [0, 5, 7, 4, 5],
+  },
+  {
+    name: 'IMPURE',
+    lines: [10, 5, 3, 6, 5],
+  },
+  {
+    name: 'IMPERFECT',
+    lines: [5, 3, 6, 5, 4, 6],
+  },
+  {
+    name: 'LIE',
+    lines: [6, 3, 5, 7, 4, 5],
+  },
+  {
+    name: 'TOGETHER',
+    lines: [8, 6, 5, 4, 3, 5],
+  },
+  {
+    name: 'RESISTANCE',
+    lines: [6, 10, 5, 0, 3, 4],
+  },
+  {
+    name: 'STRUGGLE',
+    lines: [6, 10, 5, 0, 3, 4],
+  },
+  {
+    name: 'HARM',
+    lines: [9, 7, 5, 3, 0, 4, 5],
+  },
+  {
+    name: 'ENLIGHTENMENT',
+    lines: [10, 9, 2, 0, 3, 5, 4, 3],
+  },
+  {
+    name: 'BALANCE',
+    lines: [0, 5, 6, 8, 10, 9, 7, 5],
+  },
+  {
+    name: 'PERFECTION',
+    lines: [0, 5, 6, 8, 10, 9, 7, 5],
+  },
+  {
+    name: 'HUMAN',
+    lines: [3, 6, 10, 7, 4, 3],
+  },
+  {
+    name: 'BODY',
+    lines: [3, 5, 4, 3],
+  },
+  {
+    name: 'OPEN',
+    lines: [6, 7, 10, 6],
+  },
+  {
+    name: 'ACCEPT',
+    lines: [6, 7, 10, 6],
+  },
+  {
+    name: 'NOURISH',
+    lines: [8, 6, 10, 8],
+  },
+  {
+    name: 'RECHARGE',
+    lines: [0, 1, 3, 0],
+  },
+  {
+    name: 'REPAIR',
+    lines: [0, 1, 3, 0],
+  },
+  {
+    name: 'MIND',
+    lines: [10, 5, 3, 6, 10],
+  },
+  {
+    name: 'SOUL',
+    lines: [10, 7, 4, 5, 10],
+  },
+  {
+    name: 'END',
+    lines: [0, 5, 10, 7, 2, 0],
+  },
+  {
+    name: 'ALL',
+    lines: [0, 1, 8, 10, 9, 2, 0],
+  },
+  {
+    name: 'CLOSE-ALL',
+    lines: [0, 1, 8, 10, 9, 2, 0, 5, 10],
+  },
+  {
+    name: 'OPEN-ALL',
+    lines: [10, 8, 1, 0, 2, 9, 10, 6, 7, 10],
+  },
+  {
+    name: 'STRONG',
+    lines: [3, 6, 7, 4, 3],
+  },
+  {
+    name: 'XM',
+    lines: [6, 5, 7, 4, 3, 6],
+  },
+  {
+    name: 'TRUTH',
+    lines: [3, 6, 5, 4, 7, 5, 3],
+  },
+  {
+    name: 'PORTAL',
+    lines: [8, 6, 7, 9, 2, 4, 3, 1, 8],
+  },
+  {
+    name: 'HARMONY',
+    lines: [5, 6, 10, 7, 5, 3, 0, 4, 5],
+  },
+  {
+    name: 'PEACE',
+    lines: [5, 6, 10, 7, 5, 3, 0, 4, 5],
+  },
+  {
+    name: 'RESTRAINT',
+    lines: [1, 3, 5, 7, 9, 10],
+  },
+];
+GS_GLYPH_INFO_BY_NAME = {};
+for (var i = 0; i < GS_GLYPH_INFOS.length; i++) {
+  GS_GLYPH_INFO_BY_NAME[GS_GLYPH_INFOS[i].name] = GS_GLYPH_INFOS[i];
+}
+
+GS_GLYPH_PATTERNS = [
+  ['GAIN', 'TRUTH', 'OPEN', 'HUMAN', 'SOUL'],
+  ['OLD', 'NATURE', 'LESS', 'STRONG', 'NOW'],
+  ['PAST', 'CHAOS', 'CREATE', 'FUTURE', 'HARMONY'],
+  ['PAST', 'PATH', 'CREATE', 'FUTURE', 'JOURNEY'],
+  ['DESTROY', 'LIE', 'INSIDE', 'GAIN', 'SOUL'],
+  ['DESTROY', 'CIVILIZATION', 'END', 'CONFLICT', 'WAR'],
+  ['BREATHE', 'INSIDE', 'XM', 'LOSE', 'SELF'],
+  ['DEFEND', 'DESTINY', 'DEFEND', 'HUMAN', 'CIVILIZATION'],
+  ['DEFEND', 'HUMAN', 'CIVILIZATION', 'XM', 'MESSAGE'],
+  ['DEFEND', 'HUMAN', 'CIVILIZATION', 'SHAPERS', 'LIE'],
+  ['DEFEND', 'HUMAN', 'CIVILIZATION', 'PORTAL', 'DATA'],
+  ['DEFEND', 'HUMAN', 'CIVILIZATION', 'SHAPERS', 'PORTAL'],
+  ['HELP', 'ENLIGHTENMENT', 'CAPTURE', 'ALL', 'PORTAL'],
+  ['HELP', 'RESISTANCE', 'CAPTURE', 'ALL', 'PORTAL'],
+  ['HELP', 'HUMAN', 'CIVILIZATION', 'PURSUE', 'DESTINY'],
+  ['PURSUE', 'PATH', 'OUTSIDE', 'SHAPERS', 'LIE'],
+  ['PURSUE', 'CONFLICT', 'WAR', 'ADVANCE', 'CHAOS'],
+  ['WEAK', 'HUMAN', 'DESTINY', 'DESTROY', 'CIVILIZATION'],
+  ['AVOID', 'CHAOS', 'REPAIR', 'POTENTIAL', 'WAR'],
+  ['AVOID', 'PERFECTION', 'STABILITY', 'HUMAN', 'SELF'],
+  ['AVOID', 'CHAOS', 'AVOID', 'SHAPERS', 'LIE'],
+  ['REBEL', 'THOUGHT', 'EVOLUTION', 'DESTINY', 'NOW'],
+  ['SEPERATE', 'MIND', 'BODY', 'DISCOVER', 'ENLIGHTENMENT'],
+  ['SEPERATE', 'TRUTH', 'LIE', 'SHAPERS', 'FUTURE'],
+  ['FORGET', 'PAST', 'SEE', 'PRESENT', 'DANGER'],
+  ['FORGET', 'WAR', 'SEE', 'DISTANCE', 'HARMONY'],
+  ['CREATE', 'PURE', 'FUTURE', 'NOT', 'WAR'],
+  ['CREATE', 'PURE', 'FUTURE', 'HUMAN', 'CIVILIZATION'],
+  ['CREATE', 'SEPERATE', 'PATH', 'END', 'JOURNEY'],
+  ['ADVANCE', 'CIVILIZATION', 'PURSUE', 'SHAPERS', 'PATH'],
+  ['DISTANCE', 'SELF', 'AVOID', 'HUMAN', 'LIE'],
+  ['COURAGE', 'ATTACK', 'SHAPERS', 'PORTAL', 'TOGETHER'],
+  ['WANT', 'TRUTH', 'PURSUE', 'DIFFICULT', 'PATH'],
+  ['STAY', 'STRONG', 'TOGETHER', 'DEFEND', 'RESISTANCE'],
+  ['SHAPERS', 'PORTAL', 'DATA', 'CREATE', 'CHAOS'],
+  ['SHAPERS', 'PORTAL', 'MESSAGE', 'DESTROY', 'CIVILIZATION'],
+  ['SHAPERS', 'WANT', 'HUMAN', 'MIND', 'FUTURE'],
+  ['SHAPERS', 'LEAD', 'HUMAN', 'COMPLEX', 'JOURNEY'],
+  ['CHAOS', 'WAR', 'CONFLICT', 'DISCOVER', 'PEACE'],
+  ['LIBERATE', 'PORTAL', 'LIBERATE', 'HUMAN', 'MIND'],
+  ['PRESENT', 'CHAOS', 'CREATE', 'FUTURE', 'CIVILIZATION'],
+  ['INSIDE', 'MIND', 'INSIDE', 'SOUL', 'HARMONY'],
+  ['ANSWER', 'QUESTION', 'DISCOVER', 'DIFFICULT', 'TRUTH'],
+  ['HIDE', 'STRUGGLE', 'ADVANCE', 'STRONG', 'TOGETHER'],
+  ['SIMPLE', 'TRUTH', 'SHAPERS', 'DESTROY', 'CIVILIZATION'],
+  ['SIMPLE', 'OLD', 'TRUTH', 'JOURNEY', 'INSIDE'],
+  ['MORE', 'DATA', 'GAIN', 'PORTAL', 'ADVANCE'],
+  ['SAVE', 'HUMAN', 'CIVILIZATION', 'DESTROY', 'PORTAL'],
+  ['QUESTION', 'LESS', 'FORGET', 'ALL', 'LIE'],
+  ['ESCAPE', 'BODY', 'JOURNEY', 'OUTSIDE', 'PRESENT'],
+  ['ESCAPE', 'BODY', 'MIND', 'SELF', 'WANT'],
+  ['CLEAR', 'MIND', 'LIBERATE', 'BARRIER', 'BODY'],
+  ['CONTEMPLATE', 'FUTURE', 'NOT', 'SHAPERS', 'PATH'],
+  ['CONTEMPLATE', 'RESTRAINT', 'DISCOVER', 'MORE', 'COURAGE'],
+  ['USE', 'RESTRAINT', 'FOLLOW', 'EASY', 'PATH'],
+  ['USE', 'MIND', 'USE', 'COURAGE', 'CHANGE'],
+  ['SEARCH', 'DESTINY', 'CREATE', 'PURE', 'FUTURE'],
+  ['EASY', 'PATH', 'FUTURE', 'FOLLOW', 'SHAPERS'],
+  ['REACT', 'REBEL', 'QUESTION', 'SHAPERS', 'LIE'],
+  ['CAPTURE', 'PORTAL', 'DEFEND', 'PORTAL', 'COURAGE'],
+  ['LOSE', 'SHAPERS', 'MESSAGE', 'GAIN', 'CHAOS'],
+  ['PURE', 'HUMAN', 'FAILURE', 'NOW', 'CHAOS'],
+  ['IMPERFECT', 'XM', 'MESSAGE', 'HUMAN', 'CHAOS'],
+  ['IMPERFECT', 'TRUTH', 'OPEN', 'COMPLEX', 'ANSWER'],
+  ['HUMAN', 'SHAPERS', 'TOGETHER', 'CREATE', 'DESTINY'],
+  ['HUMAN', 'NOT', 'TOGETHER', 'CIVILIZATION', 'DETERIORATE'],
+  ['RECHARGE', 'PRESENT', 'RECHARGE', 'HUMAN', 'SOUL'],
+  ['REPAIR', 'SOUL', 'LESS', 'HUMAN', 'HARM'],
+  ['CLOSE-ALL', 'THOUGHT', 'PAST', 'PRESENT', 'FUTURE'],
+  ['STRONG', 'TOGETHER', 'WAR', 'TOGETHER', 'DESTINY'],
+  ['STRONG', 'TOGETHER', 'WAR', 'TOGETHER', 'CHAOS'],
+  ['XM', 'PATH', 'FUTURE', 'DESTINY', 'HARMONY'],
+  ['XM', 'CREATE', 'COMPLEX', 'HUMAN', 'DESTINY'],
+  ['PORTAL', 'CREATE', 'DANGER', 'PURSUE', 'SAFETY'],
+  ['PORTAL', 'POTENTIAL', 'HELP', 'HUMAN', 'FUTURE'],
+  ['PORTAL', 'BARRIER', 'DEFEND', 'HUMAN', 'SHAPERS'],
+  ['PORTAL', 'IMPROVE', 'HUMAN', 'FUTURE', 'CIVILIZATION'],
+];
+
+function IncrementalSearchGlyph() {
+  // init glyph info
+  var glyphInfos = [];
+  for (var i = 0; i < GS_GLYPH_INFOS.length; i++) {
+    var name = GS_GLYPH_INFOS[i].name;
+    glyphInfos[name] = {};
+
+    glyphInfos[name].lineSet = {};
+    for (var j = 0; j < GS_GLYPH_INFOS[i].lines.length; j++) {
+      var a = GS_GLYPH_INFOS[i].lines[j + 0];
+      var b = GS_GLYPH_INFOS[i].lines[(j + 1) % GS_GLYPH_INFOS[i].lines.length];
+      if (a < b)
+        glyphInfos[name].lineSet[a * 11 + b] = true;
+      else
+        glyphInfos[name].lineSet[b * 11 + a] = true;
+    }
+
+    glyphInfos[name].pointSet = {};
+    for (var j = 0; j < GS_GLYPH_INFOS[i].lines.length; j++) {
+      var a = GS_GLYPH_INFOS[i].lines[j];
+      glyphInfos[name].pointSet[a] = true;
+    }
+  }
+
+  // check glyphs
+  for (var i = 0; i < GS_GLYPH_PATTERNS.length; i++) {
+    for (var j = 0; j < GS_GLYPH_PATTERNS[i].length; j++) {
+      if (glyphInfos[GS_GLYPH_PATTERNS[i][j]] === undefined) {
+        console.log('nothing: ', GS_GLYPH_PATTERNS[i][j]);
+      }
+    }
+  }
+
+
+  var currentGlyphSequence = 0;
+  var currentGlyphCandidates = [];
+  var hitGlyphSet = {};
+
+  var lastHitGlyph = null;
+  this.hitGlyph = function(n) {
+    if (lastHitGlyph != null && lastHitGlyph == n) return;
+    var candidates;
+    if (currentGlyphSequence == 0 && lastHitGlyph == null) {
+      candidates = GS_GLYPH_PATTERNS.concat();
+    } else {
+      candidates = currentGlyphCandidates.concat();
+    }
+    if (lastHitGlyph == null) {
+      for (var i = 0; i < candidates.length; i++) {
+        var name = candidates[i][currentGlyphSequence];
+        if (!glyphInfos[name])
+          console.log(name);
+        if (!glyphInfos[name].pointSet[n])
+          candidates[i] = null;
+      }
+    } else {
+      for (var i = 0; i < candidates.length; i++) {
+        var name = candidates[i][currentGlyphSequence];
+        var a = lastHitGlyph;
+        var b = n;
+        var index = a < b ? a * 11 + b : b * 11 + a;
+        if (!glyphInfos[name].lineSet[index])
+          candidates[i] = null;
+      }
+    }
+
+    // update
+    lastHitGlyph = n;
+    currentGlyphCandidates = [];
+    for (var i = 0; i < candidates.length; i++) {
+      if (candidates[i] != null) {
+        currentGlyphCandidates.push(candidates[i]);
+      }
+    }
+  };
+  this.nextSequence = function() {
+    currentGlyphSequence += 1;
+    lastHitGlyph = null;
+  };
+  this.getCurrentGlyphCandidates = function() {
+    return currentGlyphCandidates;
+  };
+  this.clear = function() {
+    currentGlyphSequence = 0;
+    lastHitGlyph = null;
+    currentGlyphCandidates = [];
+  };
+}
+
+GS_GLYPH_OFFSET_X = 30;
+GS_GLYPH_OFFSET_Y = 30;
+GS_HIT_SIZE = 60;
+GS_GLYPH_SIZE = 20;
+GS_BOARD_WIDTH = 400;
+GS_BOARD_HEIGHT = 400;
+
+function drawLine(ctx, x1, y1, x2, y2) {
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = '#ffffff';
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+}
+function drawGlyph(ctx, glyphs, i) {
+  var x = glyphs[i].x;
+  var y = glyphs[i].y;
+  ctx.beginPath();
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = "#ffffff";
+  ctx.fillStyle = glyphs[i].hit ? '#ffff00' : '#000000';
+  ctx.arc(x, y, GS_GLYPH_SIZE / 2, 0, 2 * Math.PI, false);
+  ctx.fill();
+  ctx.stroke();
+}
+function clearCanvas(ctx, canvas, glyphs) {
+  ctx.fillStyle = '#000000';
+  ctx.fillRect(0, 0, canvas.width(), canvas.height());
+
+  // draw glyph
+  for (var i = 0; i < glyphs.length; i++) {
+    glyphs[i].hit = false;
+    drawGlyph(ctx, glyphs, i);
+  }
+}
+function updateCandidates(cd) {
+  $('#candidates').empty();
+  for (var i = 0; i < cd.length; i++) {
+    var li = $('<li>');
+    var ul = $('<ul class="gs-mini-glyph-sequence"></ul>');
+    for (var j = 0; j < cd[i].length; j++) {
+      var canvas = createMiniGlyph(64, 64, 58, 58, GS_GLYPH_INFO_BY_NAME[cd[i][j]]);
+      $(canvas).addClass('gs-mini-glyph');
+      ul.append($('<li></li>').append($(canvas)))
+    }
+    li.append(ul);
+    $('#candidates').append(li);
+  }
+}
+function createMiniGlyph(canvas_width, canvas_height, draw_width, draw_height, glyph_info) {
+  var canvas = $('<canvas>').attr('width', canvas_width).attr('height', canvas_height)[0];
+  var ctx = canvas.getContext("2d");
+  ctx.fillStyle = '#000000';
+  ctx.fillRect(0, 0, canvas_width, canvas_height);
+
+  // draw glyph
+  var offx = (canvas_width - draw_width) / 2;
+  var offy = (canvas_height - draw_height) / 2;
+  for (var i = 0; i < GS_GLYPH_POINTS.length; i++) {
+    var p = GS_GLYPH_POINTS[i];
+    var x = draw_width * p.x + offx;
+    var y = draw_height * p.y + offy;
+    ctx.beginPath();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "#ffffff";
+    ctx.arc(x, y, 3, 0, 2 * Math.PI, false);
+  }
+
+  // draw line
+  ctx.beginPath();
+  ctx.lineWidth = 2;
+  var line = glyph_info.lines[0];
+  var p = GS_GLYPH_POINTS[line];
+  var x = draw_width * p.x + offx;
+  var y = draw_height * p.y + offy;
+  ctx.moveTo(x, y);
+  for (var i = 1; i < glyph_info.lines.length; i++) {
+    var line = glyph_info.lines[i];
+    var p = GS_GLYPH_POINTS[line];
+    var x = draw_width * p.x + offx;
+    var y = draw_height * p.y + offy;
+    ctx.lineTo(x, y);
+  }
+
+  ctx.stroke();
+  return canvas;
+}
+
+function getMousePoint(e, element) {
+  var x, y;
+  if (e.changedTouches === undefined) {
+    x = e.pageX;
+    y = e.pageY;
+  } else {
+    x = e.changedTouches[0].pageX;
+    y = e.changedTouches[0].pageY;
+  }
+  var offset = $(element).offset();
+  x = x - offset.left;
+  y = y - offset.top;
+  return { x: x, y: y };
+}
+
+GS_GLYPH_POINTS = [
+  {
+    x: 0.5,
+    y: 0.0,
+  }, {
+    x: 0.0,
+    y: 0.25,
+  }, {
+    x: 1.0,
+    y: 0.25,
+  }, {
+    x: 0.25,
+    y: 0.375,
+  }, {
+    x: 0.75,
+    y: 0.375,
+  }, {
+    x: 0.5,
+    y: 0.5,
+  }, {
+    x: 0.25,
+    y: 0.625,
+  }, {
+    x: 0.75,
+    y: 0.625,
+  }, {
+    x: 0.0,
+    y: 0.75,
+  }, {
+    x: 1.0,
+    y: 0.75,
+  }, {
+    x: 0.5,
+    y: 1.0,
+  },
+];
+$(function() {
+  // locate glyph
+  var glyphs = [];
+  for (var i = 0; i < GS_GLYPH_POINTS.length; i++) {
+    glyphs.push({
+      x: GS_BOARD_WIDTH * GS_GLYPH_POINTS[i].x + GS_GLYPH_OFFSET_X,
+      y: GS_BOARD_HEIGHT * GS_GLYPH_POINTS[i].y + GS_GLYPH_OFFSET_Y,
+    });
+  }
+  var moving = false;
+  var lastHit = null;
+  var ctx = $('#canvas')[0].getContext("2d");
+
+  clearCanvas(ctx, $('#canvas'), glyphs);
+
+  var lastMoveX = null;
+  var lastMoveY = null;
+
+  var isg = new IncrementalSearchGlyph();
+  $('#clear').click(function() {
+    isg.clear();
+    updateCandidates([]);
+  });
+
+  $('#canvas').on('touchstart mousedown', function(e) {
+    e.preventDefault();
+    moving = true;
+    var p = getMousePoint(e, this);
+
+    lastMoveX = p.x;
+    lastMoveY = p.y;
+  });
+  $('#canvas').on('touchmove mousemove', function(e) {
+    if (!moving) return;
+
+    e.preventDefault();
+    var p = getMousePoint(e, this);
+    drawLine(ctx, lastMoveX, lastMoveY, p.x, p.y);
+    lastMoveX = p.x;
+    lastMoveY = p.y;
+
+    for (var i = 0; i < glyphs.length; i++) {
+      if (glyphs[i].x - GS_HIT_SIZE / 2 < p.x && p.x < glyphs[i].x + GS_HIT_SIZE / 2 &&
+          glyphs[i].y - GS_HIT_SIZE / 2 < p.y && p.y < glyphs[i].y + GS_HIT_SIZE / 2) {
+        if (lastHit == null || lastHit != i) {
+          glyphs[i].hit = true;
+          lastHit = i;
+          drawGlyph(ctx, glyphs, i);
+
+          isg.hitGlyph(i);
+          var cd = isg.getCurrentGlyphCandidates();
+          updateCandidates(cd);
+        }
+      }
+    }
+  });
+  $('#canvas').on('touchup mouseup', function(e) {
+    if (!moving) return;
+    e.preventDefault();
+    moving = false;
+    isg.nextSequence();
+    clearCanvas(ctx, $('#canvas'), glyphs);
+  });
+  $('#canvas').on('touchcancel mouseleave', function(e) {
+    if (!moving) return;
+    e.preventDefault();
+    moving = false;
+    isg.nextSequence();
+    clearCanvas(ctx, $('#canvas'), glyphs);
+  });
+});
+
+</script>
+
+<style type="text/css">
+#canvas {
+  margin: 20px;
+  float: left;
+}
+ul.gs-mini-glyph-sequence {
+  list-style-type: none;
+}
+ul.gs-mini-glyph-sequence > li {
+  display: inline;
+}
+ul#candidates {
+  list-style-type: none;
+}
+</style>
+
+    <title>Ingress Glyph Search</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  </head>
+  <body>
+    <div id="main" role="main">
+      <canvas id="canvas" width="460" height="460"></canvas>
+    </div>
+    <a id="clear" class="btn btn-default" href="#" role="button">Clear</a>
+    <ul id="candidates">
+    </ul>
+  </body>
+</html>
