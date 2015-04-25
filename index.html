@@ -736,12 +736,12 @@ function createMiniGlyph(canvas_width, canvas_height, draw_width, draw_height, g
 
 function getMousePoint(e, element) {
   var x, y;
-  if (e.changedTouches === undefined) {
+  if (e.originalEvent.touches === undefined) {
     x = e.pageX;
     y = e.pageY;
   } else {
-    x = e.changedTouches[0].pageX;
-    y = e.changedTouches[0].pageY;
+    x = e.originalEvent.touches[0].pageX;
+    y = e.originalEvent.touches[0].pageY;
   }
   var offset = $(element).offset();
   x = x - offset.left;
